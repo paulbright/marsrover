@@ -145,7 +145,7 @@ public class TestRovers {
         Character orientation = sText[2].charAt(0); 
         
         String command = sCommand.replaceAll("\"", "");
-        Rover rover = RoverFactory.createRover("", x, y, orientation);
+        Rover rover = RoverFactory.createRover("", x, y, orientation, command);
         return rover;
         
     }
