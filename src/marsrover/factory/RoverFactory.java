@@ -20,8 +20,7 @@ public class RoverFactory {
     public static Rover createRover(String name, int x, int y, Character direction, String command) 
             throws InvalidPositionException, InvalidCommandException{
         Position position = new Position(x,y,direction);
-	Grid.validate(position.getLocation());
-       
+	Grid.validate(position.getLocation());      
         Rover rover = new Rover(name, position);
         rover.setCommandString(command);
         return rover;

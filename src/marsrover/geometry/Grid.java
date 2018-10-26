@@ -17,15 +17,19 @@ import java.util.List;
  */
 public class Grid {
     private static int lx, ly, tx, ty;
-    private static List<Rover> rovers;
-    public static void initGrid(int lx, int ly, int tx, int ty) {
-        Grid.lx = lx;
-        Grid.ly = ly;
+    private static List<Rover> rovers = null;    
+    public static void initGrid(int tx, int ty) {
+        Grid.lx = 0;
+        Grid.ly = 0;
         Grid.tx = tx;
         Grid.ty = ty;
+        if(rovers != null) rovers.clear();
         rovers = new ArrayList<>();
     }
     
+    public static List<Rover> getRovers() {
+        return rovers;
+    }
     public static void addRover(Rover rover){
         rovers.add(rover);        
     }

@@ -5,6 +5,9 @@
  */
 package marsrover;
 
+import marsrover.exceptions.InvalidCommandException;
+import marsrover.exceptions.InvalidPositionException;
+import marsrover.exceptions.InvalidTestcaseFile;
 import test.TestRovers;
 
 /**
@@ -16,7 +19,13 @@ public class Marsrover {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {        
-        TestRovers.test();
+    public static void main(String[] args) throws InvalidTestcaseFile, InvalidPositionException, InvalidCommandException {   
+        //TestRovers.test();
+        if(args.length == 0){
+            System.out.println("usage: java -cp marsrover.jar marsrover.Marsrover <testcasefile.txt>");
+            return;
+        }
+        
+        TestRovers.test(args[0]);
     }
 }
