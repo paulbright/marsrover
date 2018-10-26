@@ -25,21 +25,18 @@ import marsrover.exceptions.InvalidCommandException;
 public class Rover implements IVehicle {
     private String name;
     private Position position; 
-    private String command;
-    private Orientation orientation;
+    private String command;   
     private List <ICommandMovement> commands;
 
 
-    public Rover(String name, Position position, Orientation orientation){
+    public Rover(String name, Position position){
         this.name = name;
-        this.position = position;
-        this.orientation = orientation;
-        this.position.setOrientation(orientation);
+        this.position = position;                
 	commands = new ArrayList<>();
     }
 
     public Orientation getOrientation() {
-        return orientation;
+        return position.getOrientation();
     }
     
     public void clearCommads(){
@@ -47,7 +44,7 @@ public class Rover implements IVehicle {
 	commands.clear();
     }
     public void setOrientation(Orientation orientation) {
-        this.orientation = orientation;
+        position.setOrientation(orientation);
     }
     
     public String getCommandString() {
@@ -104,7 +101,7 @@ public class Rover implements IVehicle {
     
     @Override
     public String toString(){
-        return name + position.toString() + " " + orientation.toString();
+        return name + position.toString() + " " + getOrientation().toString();
     }
 
     @Override

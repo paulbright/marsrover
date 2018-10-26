@@ -17,8 +17,6 @@ public class Marsrover {
      * @param args the command line arguments
      */
     public static void main(String[] args) {        
-        TestRovers.testRovers();
-	TestRovers.testRovers(5,5, 1,2,'N',"LMLMLMLMM");
-	TestRovers.testRovers(5,5, 3,3, 'E', "MMRMMRMRRM");
+        TestRovers.test();
     }
 }

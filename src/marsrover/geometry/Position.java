@@ -29,11 +29,12 @@ public class Position {
     }
     
 
-    public Orientation getDirection() {
+    public Orientation getOrientation() {
         return orientation;
     }
     
-    public Position(int x, int y) throws InvalidPositionException{ 
+    public Position(int x, int y, Character orientation) throws InvalidPositionException{ 
+        this.orientation = new Orientation(orientation);
 	location = new Point(x,y);
 	Grid.validate(location);
     }

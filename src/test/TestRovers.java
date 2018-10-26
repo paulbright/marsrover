@@ -23,6 +23,12 @@ import marsrover.exceptions.InvalidCommandException;
  */
 public class TestRovers {
     
+    public static void test(){
+        TestRovers.testRovers();
+	TestRovers.testRovers(5,5, 1,2,'N',"LMLMLMLMM");
+	TestRovers.testRovers(5,5, 3,3, 'E', "MMRMMRMRRM");
+    }
+    
     public static void testRovers() {        
         Object [][] data =  {   
                                 {5,5},
