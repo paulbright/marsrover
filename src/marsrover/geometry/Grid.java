@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marsrover;
+package marsrover.geometry;
 
+import marsrover.vehicles.Rover;
+import marsrover.exceptions.InvalidPositionException;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class Grid {
         return ty;
     }
 
-    public static void validate(int x, int y) throws InvalidPositionException{
+    private static void validate(int x, int y) throws InvalidPositionException{
         if( x < getLx() || x > getTx() || y < getLy() || y > getTy() ) 
             throw new InvalidPositionException("Invalid poistion (" + x +"," + y +")" );
        
@@ -51,12 +54,16 @@ public class Grid {
     public static void animateRovers(){
         for(Rover rover : rovers){
             try{
-                rover.executeCommand();
+                rover.executeStoredCommands();
                 System.out.println(rover.toString());
             }
             catch(InvalidPositionException ex){
                 System.out.println(ex.getMessage());
             }
         }
+    }
+
+    public static void validate(Point location) throws InvalidPositionException{
+	validate(location.x, location.y);
     }
 }

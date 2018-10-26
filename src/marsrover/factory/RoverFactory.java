@@ -3,7 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marsrover;
+package marsrover.factory;
+
+import marsrover.geometry.Grid;
+import marsrover.geometry.Orientation;
+import marsrover.geometry.Position;
+import marsrover.vehicles.Rover;
+import marsrover.exceptions.InvalidCommandException;
+import marsrover.exceptions.InvalidPositionException;
 
 /**
  *
@@ -11,12 +18,12 @@ package marsrover;
  */
 public class RoverFactory {
     public static Rover createRover(String name, int x, int y, Character direction, String command) 
-            throws InvalidPositionException{
-        Grid.validate(x, y);
+            throws InvalidPositionException, InvalidCommandException{
         Position position = new Position(x,y);
+	Grid.validate(position.getLocation());
         Orientation orientation = new Orientation(direction);
         Rover rover = new Rover(name, position, orientation);
-        rover.setCommand(command);
+        rover.setCommandString(command);
         return rover;
     }
 }

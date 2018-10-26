@@ -3,20 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marsrover;
-
-import test.TestRovers;
+package marsrover.exceptions;
 
 /**
  *
  * @author paulbright
  */
-public class Marsrover {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {        
-        TestRovers.testRovers();
+public class InvalidPositionException extends Exception{
+    public InvalidPositionException(String msg) {
+        super(msg);
     }
 }

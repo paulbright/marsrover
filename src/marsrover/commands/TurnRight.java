@@ -3,20 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marsrover;
+package marsrover.commands;
 
-import test.TestRovers;
+import marsrover.vehicles.IVehicle;
 
 /**
  *
  * @author paulbright
  */
-public class Marsrover {
+public class TurnRight implements ICommandMovement{
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {        
-        TestRovers.testRovers();
+    @Override
+    public void execute(IVehicle vehicle) {
+	vehicle.turnRight();
     }
 }

@@ -7,11 +7,12 @@ package test;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import marsrover.Grid;
-import marsrover.InvalidPositionException;
+import marsrover.geometry.Grid;
+import marsrover.exceptions.InvalidPositionException;
 import marsrover.Marsrover;
-import marsrover.Rover;
-import marsrover.RoverFactory;
+import marsrover.vehicles.Rover;
+import marsrover.factory.RoverFactory;
+import marsrover.exceptions.InvalidCommandException;
 
 /**
  *
@@ -33,8 +34,17 @@ public class TestRovers {
         try {
             Grid.initGrid(0,0, (int)data[0][0],(int)data[0][1]);
             for(int i=1; i< data.length;i++){
-                Rover rover = RoverFactory.createRover("", (int)data[i][0], (int)data[i][1], (Character)data[i][2],(String)data[i][3]);                
-                Grid.addRover(rover);                                
+                Rover rover;
+		try{
+		    rover = RoverFactory.createRover("", (int)data[i][0], 
+			    (int)data[i][1], (Character)data[i][2],
+			    (String)data[i][3]);                
+		    Grid.addRover(rover); 
+		}
+		catch(InvalidCommandException ex){
+		    Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		
             }
             
             Grid.animateRovers();

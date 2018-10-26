@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marsrover;
+package marsrover.exceptions;
 
 /**
  *
  * @author paulbright
  */
-public enum DIRECTION {
-     NORTH, EAST, WEST, SOUTH;
+public class InvalidCommandException extends Exception{
+    public InvalidCommandException(String msg) {
+        super(msg);
+    }
 }

@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marsrover;
+package marsrover.geometry;
+
+import marsrover.enums.DIRECTION;
+import marsrover.enums.TURN;
 
 /**
  *
@@ -25,6 +28,12 @@ public class Orientation {
         return this.direction = this.setDirection(turn=='L'? TURN.LEFT : TURN.RIGHT);
     }
     
+    public DIRECTION setDirectionLeft() {
+        return this.direction = Turning.turn(this.direction, TURN.LEFT);
+    }
+    public DIRECTION setDirectionRight() {
+        return this.direction = Turning.turn(this.direction, TURN.RIGHT);
+    }
     public DIRECTION setDirection(TURN turn) {
         return this.direction = Turning.turn(this.direction, turn);
     }
