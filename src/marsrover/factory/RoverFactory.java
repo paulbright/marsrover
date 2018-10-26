@@ -26,4 +26,13 @@ public class RoverFactory {
         rover.setCommandString(command);
         return rover;
     }
+    
+    public static Rover createRover(String name, int x, int y, Character direction) 
+            throws InvalidPositionException, InvalidCommandException{
+        Position position = new Position(x,y);
+	Grid.validate(position.getLocation());
+        Orientation orientation = new Orientation(direction);
+        Rover rover = new Rover(name, position, orientation);
+        return rover;
+    }
 }

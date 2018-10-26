@@ -5,11 +5,14 @@
  */
 package test;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import marsrover.geometry.Grid;
 import marsrover.exceptions.InvalidPositionException;
 import marsrover.Marsrover;
+import marsrover.commands.ICommandMovement;
+import marsrover.commands.MovementCommandGenerator;
 import marsrover.vehicles.Rover;
 import marsrover.factory.RoverFactory;
 import marsrover.exceptions.InvalidCommandException;
@@ -52,5 +55,25 @@ public class TestRovers {
         } catch (InvalidPositionException ex) {
             Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static void testRovers(int tx, int ty, int x, int y, Character orientation, String command) {  
+	Grid.initGrid(0,0, tx,ty);	
+	Rover rover;
+	try{
+	    rover = RoverFactory.createRover("", x, y,orientation);		                
+	    Grid.addRover(rover); 
+	    List<ICommandMovement> commands = MovementCommandGenerator.generateCommands(command);
+	    for(ICommandMovement cmd : commands){
+		cmd.execute(rover);
+	    }
+	    System.out.println(rover.toString());
+	}
+	catch(InvalidCommandException ex){
+	    Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	catch(InvalidPositionException ex){
+	    Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
+	}
     }
 }

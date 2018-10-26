@@ -13,6 +13,7 @@ import marsrover.geometry.Orientation;
 import marsrover.geometry.Position;
 import marsrover.commands.ICommandMovement;
 import marsrover.commands.MoveForward;
+import marsrover.commands.MovementCommandGenerator;
 import marsrover.commands.TurnLeft;
 import marsrover.commands.TurnRight;
 import marsrover.exceptions.InvalidCommandException;
@@ -26,7 +27,7 @@ public class Rover implements IVehicle {
     private Position position; 
     private String command;
     private Orientation orientation;
-    private final List <ICommandMovement> commands;
+    private List <ICommandMovement> commands;
 
 
     public Rover(String name, Position position, Orientation orientation){
@@ -92,9 +93,6 @@ public class Rover implements IVehicle {
     }
 
     public void executeStoredCommands() throws InvalidPositionException{        
-//        for(int i=0; i<this.command.length();i++){
-//            position.move(this.command.charAt(i));
-//        }
 	for(ICommandMovement command: commands){
 	    command.execute(this);
 	}
@@ -125,23 +123,7 @@ public class Rover implements IVehicle {
     }
 
     private void validateCommands() throws InvalidCommandException{
-	for(int i=0; i<this.command.length();i++){
-            switch(this.command.charAt(i)){
-		case 'M':
-		    commands.add(new MoveForward());
-		    break;
-		case 'L':
-		    commands.add(new TurnLeft());
-		    break;
-		case 'R':
-		    commands.add(new TurnRight());
-		    break;
-		default :
-		    throw new InvalidCommandException(this.command.charAt(i) 
-			    + " is not a valid command");
-		    
-	    }
-        }
+	this.commands =  MovementCommandGenerator.generateCommands(command);
     }
  
 }
