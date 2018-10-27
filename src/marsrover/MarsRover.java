@@ -17,7 +17,7 @@ import marsrover.vehicles.RoverHandler;
  *
  * @author paulbright
  */
-public class Marsrover {
+public class MarsRover {
 
     /**
      * @param args the command line arguments
@@ -28,7 +28,7 @@ public class Marsrover {
     public static void main(String[] args) throws InvalidTestcaseFile, InvalidPositionException, InvalidCommandException {   
         
         if(args.length == 0){
-            System.out.println("usage: java -cp marsrover.jar marsrover.Marsrover <testcasefile.txt>");
+            System.out.println("usage: java -cp marsrover.jar marsrover.MarsRover <testcasefile.txt>");
             return;
         }
         

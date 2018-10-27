@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import marsrover.Marsrover;
+import marsrover.MarsRover;
 import marsrover.exceptions.InvalidCommandException;
 import marsrover.exceptions.InvalidPositionException;
 import marsrover.exceptions.InvalidTestcaseFile;
@@ -55,7 +55,7 @@ public class RoverTestcaseLoader {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MarsRover.class.getName()).log(Level.SEVERE, null, ex);
 
         } finally {
             try {
