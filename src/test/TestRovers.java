@@ -20,6 +20,8 @@ import marsrover.vehicles.Rover;
 import marsrover.factory.RoverFactory;
 import marsrover.exceptions.InvalidCommandException;
 import marsrover.exceptions.InvalidTestcaseFile;
+import marsrover.roverloader.RoverTestcaseLoader;
+import marsrover.vehicles.RoverHandler;
 
 /**
  *
@@ -27,6 +29,11 @@ import marsrover.exceptions.InvalidTestcaseFile;
  */
 public class TestRovers {
 
+    
+    public static void main(String[] args) {
+        runTests();
+    }
+    
     public static void test() {
         TestRovers.testRovers();
         Grid.initGrid(5, 5);
@@ -42,6 +49,7 @@ public class TestRovers {
         };
         
         testRovers(data);
+        RoverHandler.getInstance().animateVehicles();
     }
 
     public static void testRovers(Object[][] data) {
@@ -59,8 +67,6 @@ public class TestRovers {
                 }
 
             }
-
-            Grid.animateRovers();
 
         } catch (InvalidPositionException ex) {
             Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
@@ -86,67 +92,11 @@ public class TestRovers {
     }
 
     public static void test(String filename) throws InvalidTestcaseFile, InvalidPositionException, InvalidCommandException {
-        BufferedReader br = null;
-        FileReader fr = null;
+        RoverTestcaseLoader.initTestcase(filename);
+    }
 
-        try {
-            fr = new FileReader(filename);
-            br = new BufferedReader(fr);
-
-            String sGrid = br.readLine();
-            if(sGrid  == null) {
-                throwTestCaseException(filename);
-            }
-            initGrid(sGrid);
-            String sPos,sCommand;
-            while( (sPos = br.readLine()) !=null)
-            {               
-                if ((sCommand = br.readLine()) == null) {
-                    throwTestCaseException(filename);
-                }
-                Rover rover = initRover(sPos, sCommand);
-                Grid.addRover(rover);
-            }
-            Grid.animateRovers();
-                        
-        } catch (IOException ex) {
-            Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
-
-        } finally {           
-            try {
-                if (br != null) {
-                    br.close();
-                }
-                if (fr != null) {
-                    fr.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
+    private static void runTests() {
     }
     
-    private static void throwTestCaseException(String msg) throws InvalidTestcaseFile{
-        throw new InvalidTestcaseFile(msg + " invalid testcase file");
-    }
-    private static void initGrid(String sGrid) throws InvalidTestcaseFile{
-        String [] topPoint = sGrid.split(" ");
-        if(topPoint.length != 2) throwTestCaseException("incorrect grid point");
-        int x = Integer.valueOf(topPoint[0]);
-        int y = Integer.valueOf(topPoint[1]);
-        Grid.initGrid(x, y);
-    }
 
-    private static Rover initRover(String sPos, String sCommand) throws InvalidTestcaseFile, InvalidPositionException, InvalidCommandException{
-        String [] sText = sPos.split(" ");
-        if(sText.length != 3) throwTestCaseException("incorrect rover initialization");
-        int x = Integer.valueOf(sText[0]);
-        int y = Integer.valueOf(sText[1]);
-        Character orientation = sText[2].charAt(0); 
-        
-        String command = sCommand.replaceAll("\"", "");
-        Rover rover = RoverFactory.createRover("", x, y, orientation, command);
-        return rover;
-        
-    }
 }

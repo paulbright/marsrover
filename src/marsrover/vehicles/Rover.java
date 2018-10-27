@@ -90,8 +90,8 @@ public class Rover implements IVehicle {
     }
 
     public void executeStoredCommands() throws InvalidPositionException{        
-	for(ICommandMovement command: commands){
-	    command.execute(this);
+	for(ICommandMovement cmd: commands){
+	    cmd.execute(this);
 	}
     }
     

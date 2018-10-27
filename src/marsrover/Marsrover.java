@@ -8,6 +8,9 @@ package marsrover;
 import marsrover.exceptions.InvalidCommandException;
 import marsrover.exceptions.InvalidPositionException;
 import marsrover.exceptions.InvalidTestcaseFile;
+import marsrover.roverloader.RoverTestcaseLoader;
+import marsrover.roverobserver.RoverObserver;
+import marsrover.vehicles.RoverHandler;
 import test.TestRovers;
 
 /**
@@ -26,6 +29,9 @@ public class Marsrover {
             return;
         }
         
-        TestRovers.test(args[0]);
+        RoverTestcaseLoader.initTestcase(args[0]);
+        RoverHandler.getInstance().addObserver(new RoverObserver());
+        String result = RoverHandler.getInstance().animateVehicles();
+        
     }
 }

@@ -10,6 +10,7 @@ import marsrover.exceptions.InvalidPositionException;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import marsrover.roverloader.RoverTestcaseLoader;
 
 /**
  *
@@ -53,18 +54,6 @@ public class Grid {
         if( x < getLx() || x > getTx() || y < getLy() || y > getTy() ) 
             throw new InvalidPositionException("Invalid poistion (" + x +"," + y +")" );
        
-    }
-    
-    public static void animateRovers(){
-        for(Rover rover : rovers){
-            try{
-                rover.executeStoredCommands();
-                System.out.println(rover.toString());
-            }
-            catch(InvalidPositionException ex){
-                System.out.println(ex.getMessage());
-            }
-        }
     }
 
     public static void validate(Point location) throws InvalidPositionException{
