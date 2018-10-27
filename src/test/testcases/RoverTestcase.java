@@ -20,8 +20,8 @@ import marsrover.vehicles.RoverHandler;
  */
 public class RoverTestcase implements IRoverTestcase{
 
-    Object[][] data;
-    List<String> expected_results;
+    private Object[][] data;
+    private List<String> expected_results;
     public RoverTestcase(Object[][] data, List<String> expected_results){
         this.data = data;
         this.expected_results = expected_results;
@@ -32,16 +32,14 @@ public class RoverTestcase implements IRoverTestcase{
         List<String> received_results = new ArrayList<>();
         try{
             loadRovers(data);
-        }
-        catch(InvalidCommandException ex){
+        }        
+        catch(InvalidPositionException | InvalidCommandException ex){
             received_results.add(ex.getMessage());
         }
-        catch (InvalidPositionException ex){
+        catch (Exception ex){
             received_results.add(ex.getMessage());
         }
-        catch(Exception ex){
-            received_results.add(ex.getMessage());
-        }
+        
         if(received_results.size() > 0){
             return checkExceptionResults(expected_results, received_results);
         }

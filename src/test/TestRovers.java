@@ -66,8 +66,31 @@ public class TestRovers {
         List<String> expected_results2 = new ArrayList<>();
         expected_results2.add("Invalid poistion (1,2)");
                 
+        Object[][] data3 = {
+            {2147483648L, 2147483648L},
+            {1, 2, 'N', "LMLMLMLMM"}            
+        };
+        List<String> expected_results3 = new ArrayList<>();
+        expected_results3.add("java.lang.Long cannot be cast to java.lang.Integer");
+                        
+        Object[][] data4 = {
+            {2147483647, 2147483647},
+            {2500, 2500, 'N', "LMLMLMLMMLMLMLMLMMLMLMLMLMMLMLMLMLMMLMLMLMLM"},
+            {3, 3, 'E', "MMRMMRMRRM"},
+            {2500, 2500, 'N', "LMMMMMMMMMM"},
+            {3000, 1000, 'S', "LMMMMMMMMMM"}
+        };
+
+        List<String> expected_results4 = new ArrayList<>();
+        expected_results4.add("2500 2504 N");
+        expected_results4.add("5 1 E");
+        expected_results4.add("2490 2500 W");
+        expected_results4.add("3010 1000 E");
+
         loadTest(data1, expected_results1);
         loadTest(data2, expected_results2);
+        loadTest(data3, expected_results3);
+        loadTest(data4, expected_results4);
     }
     
     private void loadTest(Object[][] data, List<String> expected_results){
