@@ -8,8 +8,6 @@ package test.testcases;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import marsrover.exceptions.InvalidCommandException;
 import marsrover.exceptions.InvalidPositionException;
 import marsrover.exceptions.InvalidTestcaseFile;
@@ -26,15 +24,19 @@ import marsrover.vehicles.RoverHandler;
 public class RoverTestcase implements IRoverTestcase{
 
     private Object[][] data = null;
-    private List<String> expected_results = new ArrayList<>();
-    private List<String> testcase_load_results = new ArrayList<>();
+    private List<String> expected_results;
+    private final List<String> testcase_load_results;
     private boolean bLoadFileTest = false;
     
     public RoverTestcase(String testcaseFile, String testcaseResultFile) throws IOException{
+        this.expected_results = new ArrayList<>();
+        this.testcase_load_results = new ArrayList<>();
         bLoadFileTest = true;
         loadTests(testcaseFile, testcaseResultFile);
     }
     public RoverTestcase(Object[][] data, List<String> expected_results){
+        this.expected_results = new ArrayList<>();
+        this.testcase_load_results = new ArrayList<>();
         bLoadFileTest = false;
         this.data = data;
         this.expected_results = expected_results;
@@ -44,8 +46,8 @@ public class RoverTestcase implements IRoverTestcase{
         if( testcase_load_results.size() > 0) {
             return checkExceptionResults(expected_results, testcase_load_results);            
         }
-        List<String> received_results = new ArrayList<>();
-        received_results = RoverHandler.getInstance().animateVehicles();
+        
+        List<String> received_results = RoverHandler.getInstance().animateVehicles();
         return checkResults(expected_results, received_results);        
     }
     @Override

@@ -5,24 +5,11 @@
  */
 package test;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import marsrover.geometry.Grid;
-import marsrover.exceptions.InvalidPositionException;
-import marsrover.Marsrover;
-import marsrover.commands.ICommandMovement;
-import marsrover.commands.MovementCommandGenerator;
-import marsrover.vehicles.Rover;
-import marsrover.factory.RoverFactory;
-import marsrover.exceptions.InvalidCommandException;
-import marsrover.exceptions.InvalidTestcaseFile;
-import marsrover.roverloader.RoverTestcaseLoader;
-import marsrover.vehicles.RoverHandler;
 import test.testcases.RoverTestcase;
 
 /**

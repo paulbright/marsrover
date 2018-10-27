@@ -18,7 +18,7 @@ import marsrover.roverobserver.IVehicleObserver;
 public class RoverHandler implements IVehicleHandler{
     
     private static RoverHandler instance = new RoverHandler();
-    private List<IVehicleObserver> observers;
+    private final List<IVehicleObserver> observers;
     
     private RoverHandler(){
         observers = new ArrayList<>();

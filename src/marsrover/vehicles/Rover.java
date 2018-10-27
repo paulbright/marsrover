@@ -5,17 +5,13 @@
  */
 package marsrover.vehicles;
 
-import marsrover.vehicles.IVehicle;
 import marsrover.exceptions.InvalidPositionException;
 import java.util.ArrayList;
 import java.util.List;
 import marsrover.geometry.Orientation;
 import marsrover.geometry.Position;
 import marsrover.commands.ICommandMovement;
-import marsrover.commands.MoveForward;
 import marsrover.commands.MovementCommandGenerator;
-import marsrover.commands.TurnLeft;
-import marsrover.commands.TurnRight;
 import marsrover.exceptions.InvalidCommandException;
 
 /**

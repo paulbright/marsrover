@@ -12,7 +12,6 @@ import marsrover.exceptions.InvalidTestcaseFile;
 import marsrover.roverloader.RoverTestcaseLoader;
 import marsrover.roverobserver.RoverObserver;
 import marsrover.vehicles.RoverHandler;
-import test.TestRovers;
 
 /**
  *

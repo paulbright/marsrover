@@ -25,6 +25,13 @@ import marsrover.vehicles.Rover;
  */
 public class RoverTestcaseLoader {
 
+    /**
+     *
+     * @param filename
+     * @throws InvalidTestcaseFile
+     * @throws InvalidPositionException
+     * @throws InvalidCommandException
+     */
     public static void initTestcase(String filename) throws InvalidTestcaseFile, InvalidPositionException, InvalidCommandException {
         BufferedReader br = null;
         FileReader fr = null;

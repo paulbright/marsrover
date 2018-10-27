@@ -6,7 +6,6 @@
 package marsrover.factory;
 
 import marsrover.geometry.Grid;
-import marsrover.geometry.Orientation;
 import marsrover.geometry.Position;
 import marsrover.vehicles.Rover;
 import marsrover.exceptions.InvalidCommandException;
