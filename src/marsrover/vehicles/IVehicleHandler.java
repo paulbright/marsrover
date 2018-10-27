@@ -5,6 +5,7 @@
  */
 package marsrover.vehicles;
 
+import java.util.List;
 import marsrover.roverobserver.IVehicleObserver;
 
 /**
@@ -12,6 +13,6 @@ import marsrover.roverobserver.IVehicleObserver;
  * @author paulbright
  */
 public interface IVehicleHandler {
-    public String animateVehicles();
+    public List<String> animateVehicles();
     public void update(IVehicleObserver observer, IVehicle vehicle, String msg);
 }

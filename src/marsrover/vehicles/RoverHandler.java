@@ -42,31 +42,32 @@ public class RoverHandler implements IVehicleHandler{
     public void clearObservers(){
         observers.clear();
     }
-    private String animateRovers(){
-        StringBuilder sb = new StringBuilder();
+    private List<String> animateRovers(){
+        List<String> results = new ArrayList<>();
         
         if(Grid.getRovers() == null ||  Grid.getRovers().size() == 0) {
-            return "no rovers found";
+            results.add("no rovers found");
+            return results;
         } 
         
         for(Rover rover : Grid.getRovers()){
             try{
                 rover.executeStoredCommands();
-                sb.append(rover.toString());
+                results.add(rover.toString());
                 updateAll(rover, rover.toString());
-                sb.append("\n");
+                
             }
             catch(InvalidPositionException ex){
-                sb.append(ex.getMessage());
-                 updateAll(rover, ex.getMessage());
+                results.add(ex.getMessage());
+                updateAll(rover, ex.getMessage());
             }
         }
-        sb.deleteCharAt(sb.length()-1);
-        return sb.toString();
+        
+        return results;
     }
 
     @Override
-    public String animateVehicles() {
+    public List<String> animateVehicles() {
         return animateRovers();
     }
 

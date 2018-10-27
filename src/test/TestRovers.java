@@ -8,6 +8,7 @@ package test;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,26 +34,28 @@ public class TestRovers {
     public static void main(String[] args) {
         runTests();
     }
-    
-    public static void test() {
-        TestRovers.testRovers();
-        Grid.initGrid(5, 5);
-        TestRovers.testRovers(1, 2, 'N', "LMLMLMLMM");
-        TestRovers.testRovers(3, 3, 'E', "MMRMMRMRRM");
+    private static void runTests() {
+        System.out.println(testCase1()?"success":"failed");
     }
 
-    public static void testRovers() {
+
+    public static boolean testCase1() {
         Object[][] data = {
             {5, 5},
             {1, 2, 'N', "LMLMLMLMM"},
             {3, 3, 'E', "MMRMMRMRRM"}
         };
         
-        testRovers(data);
-        RoverHandler.getInstance().animateVehicles();
+        List<String> expected_results = new ArrayList<>();
+        expected_results.add( "1 3 N");
+        expected_results.add( "5 1 E");
+        loadRovers(data);
+        
+        List<String> received_results = RoverHandler.getInstance().animateVehicles();
+        return checkResults(expected_results, received_results);
     }
 
-    public static void testRovers(Object[][] data) {
+    private static void loadRovers(Object[][] data) {
         try {
             Grid.initGrid((int) data[0][0], (int) data[0][1]);
             for (int i = 1; i < data.length; i++) {
@@ -95,7 +98,14 @@ public class TestRovers {
         RoverTestcaseLoader.initTestcase(filename);
     }
 
-    private static void runTests() {
+    
+
+    private static boolean checkResults(List<String> expected_results, List<String> received_results) {
+        if(expected_results.size() != received_results.size()) return false;
+        for(int i=0; i<expected_results.size();i++){
+            if(expected_results.get(i).compareTo( received_results.get(i) ) != 0 ) return false;
+        }
+        return true;
     }
     
 
