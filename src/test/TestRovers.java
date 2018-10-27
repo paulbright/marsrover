@@ -23,6 +23,7 @@ import marsrover.exceptions.InvalidCommandException;
 import marsrover.exceptions.InvalidTestcaseFile;
 import marsrover.roverloader.RoverTestcaseLoader;
 import marsrover.vehicles.RoverHandler;
+import test.testcases.RoverTestcase;
 
 /**
  *
@@ -30,83 +31,47 @@ import marsrover.vehicles.RoverHandler;
  */
 public class TestRovers {
 
+    List<RoverTestcase> testcases = new ArrayList<>();
     
     public static void main(String[] args) {
-        runTests();
+        TestRovers testRovers = new TestRovers();
+        testRovers.loadTests();
+        testRovers.runTests(args);
     }
-    private static void runTests() {
-        System.out.println(testCase1()?"success":"failed");
+    
+    private void runTests(String[] args) {
+        String success = "success";
+        String failure = "failed";
+        
+        for(RoverTestcase tc: testcases){
+            System.out.println(tc.test() ? success : failure);        
+        }
     }
 
-
-    public static boolean testCase1() {
-        Object[][] data = {
+    private void loadTests() {
+        Object[][] data1 = {
             {5, 5},
             {1, 2, 'N', "LMLMLMLMM"},
             {3, 3, 'E', "MMRMMRMRRM"}
         };
-        
-        List<String> expected_results = new ArrayList<>();
-        expected_results.add( "1 3 N");
-        expected_results.add( "5 1 E");
-        loadRovers(data);
-        
-        List<String> received_results = RoverHandler.getInstance().animateVehicles();
-        return checkResults(expected_results, received_results);
-    }
-
-    private static void loadRovers(Object[][] data) {
-        try {
-            Grid.initGrid((int) data[0][0], (int) data[0][1]);
-            for (int i = 1; i < data.length; i++) {
-                Rover rover;
-                try {
-                    rover = RoverFactory.createRover("", (int) data[i][0],
-                            (int) data[i][1], (Character) data[i][2],
-                            (String) data[i][3]);
-                    Grid.addRover(rover);
-                } catch (InvalidCommandException ex) {
-                    Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-
-        } catch (InvalidPositionException ex) {
-            Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public static void testRovers(int x, int y, Character orientation, String command) {
-
-        Rover rover;
-        try {
-            rover = RoverFactory.createRover("", x, y, orientation);
-            Grid.addRover(rover);
-            List<ICommandMovement> commands = MovementCommandGenerator.generateCommands(command);
-            for (ICommandMovement cmd : commands) {
-                cmd.execute(rover);
-            }
-            System.out.println(rover.toString());
-        } catch (InvalidCommandException ex) {
-            Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidPositionException ex) {
-            Logger.getLogger(Marsrover.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public static void test(String filename) throws InvalidTestcaseFile, InvalidPositionException, InvalidCommandException {
-        RoverTestcaseLoader.initTestcase(filename);
-    }
-
-    
-
-    private static boolean checkResults(List<String> expected_results, List<String> received_results) {
-        if(expected_results.size() != received_results.size()) return false;
-        for(int i=0; i<expected_results.size();i++){
-            if(expected_results.get(i).compareTo( received_results.get(i) ) != 0 ) return false;
-        }
-        return true;
+        List<String> expected_results1 = new ArrayList<>();
+        expected_results1.add("1 3 N");
+        expected_results1.add("5 1 E");
+                
+        Object[][] data2 = {
+            {0, 0},
+            {1, 2, 'N', "LMLMLMLMM"},
+            {3, 3, 'E', "MMRMMRMRRM"}
+        };
+        List<String> expected_results2 = new ArrayList<>();
+        expected_results2.add("Invalid poistion (1,2)");
+                
+        loadTest(data1, expected_results1);
+        loadTest(data2, expected_results2);
     }
     
-
+    private void loadTest(Object[][] data, List<String> expected_results){
+        RoverTestcase testcase = new RoverTestcase(data, expected_results);
+        testcases.add(testcase);
+    }
 }
