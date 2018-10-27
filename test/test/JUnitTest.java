@@ -102,7 +102,7 @@ public class JUnitTest {
         } catch (InvalidPositionException | InvalidCommandException ex) {
             
         }                
-        assertNotEquals("RoverFactory makeVehicle", rover, null);        
+        assertNotNull("RoverFactory makeVehicle", rover);        
         Grid.addRover(rover);
         List<String> result = RoverHandler.getInstance().animateVehicles();
         assertEquals("RoverHandler.getInstance().animateVehicles", "1 3 N", result.get(0));
@@ -120,14 +120,14 @@ public class JUnitTest {
         } catch (InvalidCommandException ex) {
            
         }               
-        assertNotEquals("MovementCommandGenerator.generateCommands", commands, null);
+        assertNotNull("MovementCommandGenerator.generateCommands", commands);
         try {
             commands = MovementCommandGenerator.generateCommands("DLMMLRRMR");
         } catch (InvalidCommandException ex) {
             commands = null;
         }  
         
-        assertEquals("MovementCommandGenerator.generateCommands", commands,null);
+        assertNull("MovementCommandGenerator.generateCommands", commands);
         System.out.println("MovementCommandGenerator test success");
     }
 }
