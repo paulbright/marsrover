@@ -123,7 +123,7 @@ public class RoverTestcaseLoader {
         String orientation = sText[2];
 
         String command = sCommand.replaceAll("\"", "");
-        Rover rover = RoverFactory.createRover("", x, y, orientation, command);
+        Rover rover = (Rover) (new RoverFactory()).makeVehicle("", x, y, orientation, command);
         return rover;
 
     }

@@ -77,7 +77,7 @@ public class RoverTestcase implements IRoverTestcase{
         Grid.initGrid((int) data[0][0], (int) data[0][1]);
         for (int i = 1; i < data.length; i++) {
             Rover rover;
-            rover = RoverFactory.createRover("", (int) data[i][0],
+            rover = (Rover) (new RoverFactory()).makeVehicle("", (int) data[i][0],
                     (int) data[i][1], (String)data[i][2],
                     (String) data[i][3]);
             Grid.addRover(rover);
