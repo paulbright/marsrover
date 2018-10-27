@@ -34,25 +34,48 @@ public class TestRovers {
     List<RoverTestcase> testcases = new ArrayList<>();
     
     public static void main(String[] args) {
+        
         TestRovers testRovers = new TestRovers();
-        testRovers.loadTests();
-        testRovers.runTests(args);
+        if( args.length > 0){
+            System.out.println("loading test from files...");
+            try {  
+                testRovers.loadTests(args);
+            } catch (IOException ex) {
+                Logger.getLogger(TestRovers.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            System.out.println("running static tests...");
+            System.out.println("you may run dynamic test as well usage below.");
+            testRovers.showUsage();
+            testRovers.loadTests();
+        }
+        testRovers.runTests();     
     }
     
-    private void runTests(String[] args) {
+    private void runTests() {
         String success = "success";
         String failure = "failed";
-        
+        int i = 0;
+        int ok = 0, fail =0; 
         for(RoverTestcase tc: testcases){
-            System.out.println(tc.test() ? success : failure);        
+            boolean result = tc.test();
+                        
+            if(result)
+                ++ok;
+            else
+                ++fail; 
+            System.out.println("test case:" + (++i) +  ":\t" + (result ? success : failure) );        
         }
+        
+        System.out.println("total succes:" + ok + " and failed:" + fail);
     }
 
     private void loadTests() {
         Object[][] data1 = {
             {5, 5},
-            {1, 2, 'N', "LMLMLMLMM"},
-            {3, 3, 'E', "MMRMMRMRRM"}
+            {1, 2, "N", "LMLMLMLMM"},
+            {3, 3, "E", "MMRMMRMRRM"}
         };
         List<String> expected_results1 = new ArrayList<>();
         expected_results1.add("1 3 N");
@@ -60,25 +83,25 @@ public class TestRovers {
                 
         Object[][] data2 = {
             {0, 0},
-            {1, 2, 'N', "LMLMLMLMM"},
-            {3, 3, 'E', "MMRMMRMRRM"}
+            {1, 2, "N", "LMLMLMLMM"},
+            {3, 3, "E", "MMRMMRMRRM"}
         };
         List<String> expected_results2 = new ArrayList<>();
         expected_results2.add("Invalid poistion (1,2)");
                 
         Object[][] data3 = {
             {2147483648L, 2147483648L},
-            {1, 2, 'N', "LMLMLMLMM"}            
+            {1, 2, "N", "LMLMLMLMM"}            
         };
         List<String> expected_results3 = new ArrayList<>();
         expected_results3.add("java.lang.Long cannot be cast to java.lang.Integer");
                         
         Object[][] data4 = {
             {2147483647, 2147483647},
-            {2500, 2500, 'N', "LMLMLMLMMLMLMLMLMMLMLMLMLMMLMLMLMLMMLMLMLMLM"},
-            {3, 3, 'E', "MMRMMRMRRM"},
-            {2500, 2500, 'N', "LMMMMMMMMMM"},
-            {3000, 1000, 'S', "LMMMMMMMMMM"}
+            {2500, 2500, "N", "LMLMLMLMMLMLMLMLMMLMLMLMLMMLMLMLMLMMLMLMLMLM"},
+            {3, 3, "E", "MMRMMRMRRM"},
+            {2500, 2500, "N", "LMMMMMMMMMM"},
+            {3000, 1000, "S", "LMMMMMMMMMM"}
         };
 
         List<String> expected_results4 = new ArrayList<>();
@@ -97,4 +120,20 @@ public class TestRovers {
         RoverTestcase testcase = new RoverTestcase(data, expected_results);
         testcases.add(testcase);
     }
+
+    private void loadTests(String[] args) throws IOException {
+        if(args.length != 2 ) {
+            showUsage();
+            return;
+        }
+        RoverTestcase testcase = new RoverTestcase( args[0], args[1]);                
+        testcases.add(testcase);
+    }
+
+    private void showUsage() {
+        System.out.println("usage: java -cp marsrover.jar test.TestRovers "+
+                "<testcasefile.txt> <testresultfile.txt>");
+    }
+    
+    
 }

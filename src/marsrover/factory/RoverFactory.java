@@ -17,18 +17,18 @@ import marsrover.exceptions.InvalidPositionException;
  * @author paulbright
  */
 public class RoverFactory {
-    public static Rover createRover(String name, int x, int y, Character direction, String command) 
+    public static Rover createRover(String name, int x, int y, String direction, String command) 
             throws InvalidPositionException, InvalidCommandException{
-        Position position = new Position(x,y,direction);
+        Position position = new Position(x,y,direction.charAt(0));
 	Grid.validate(position.getLocation());      
         Rover rover = new Rover(name, position);
         rover.setCommandString(command);
         return rover;
     }
     
-    public static Rover createRover(String name, int x, int y, Character direction) 
+    public static Rover createRover(String name, int x, int y, String direction) 
             throws InvalidPositionException, InvalidCommandException{
-        Position position = new Position(x,y, direction);
+        Position position = new Position(x,y, direction.charAt(0));
 	Grid.validate(position.getLocation());
         Rover rover = new Rover(name, position);
         return rover;
