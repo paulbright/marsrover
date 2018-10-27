@@ -13,4 +13,4 @@ further improvements
 
 1. convert Grid to non-static. Currently it is kept static since the use case 
 	implies one to many relationship between Grid and Rovers.
-2. use JUnit for testing. It is not used at the moment to keep dependencies minimal.   
+2. add more JUnit unit tests   
