@@ -7,8 +7,6 @@ package test;
 
 import java.awt.Point;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import marsrover.commands.ICommandMovement;
 import marsrover.commands.MovementCommandGenerator;
 import marsrover.exceptions.InvalidCommandException;
@@ -23,6 +21,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  *
@@ -94,7 +94,12 @@ public class JUnitTest {
         rf = new RoverFactory();
         assert rf != null; 
         int x = 5, y = 5;
-        Grid.initGrid(5, 5);        
+        
+        Grid mockedGrid = mock(Grid.class);
+        
+        mockedGrid.initGrid(5, 5); 
+        verify(mockedGrid).initGrid(5,5);
+        
         Rover rover = null;
         try {
             rover = (Rover)rf.makeVehicle("", 1, 2, "N", "LMLMLMLMM");
@@ -103,7 +108,7 @@ public class JUnitTest {
             
         }                
         assertNotNull("RoverFactory makeVehicle", rover);        
-        Grid.addRover(rover);
+        mockedGrid.addRover(rover);
         List<String> result = RoverHandler.getInstance().animateVehicles();
         assertEquals("RoverHandler.getInstance().animateVehicles", "1 3 N", result.get(0));
         
