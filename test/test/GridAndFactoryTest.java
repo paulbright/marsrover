@@ -23,14 +23,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  *
  * @author paulbright
  */
-public class JUnitTest {
+public class GridAndFactoryTest {
     
-    public JUnitTest() {
+    public GridAndFactoryTest() {
     }
     
     @BeforeClass
@@ -107,11 +109,7 @@ public class JUnitTest {
         } catch (InvalidPositionException | InvalidCommandException ex) {
             
         }                
-        assertNotNull("RoverFactory makeVehicle", rover);        
-        mockedGrid.addRover(rover);
-        List<String> result = RoverHandler.getInstance().animateVehicles();
-        assertEquals("RoverHandler.getInstance().animateVehicles", "1 3 N", result.get(0));
-        
+        assertNotNull("RoverFactory makeVehicle", rover);                        
         System.out.println("RoverFactory test success");
     }
     

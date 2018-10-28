@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marsrover.vehicles;
+package marsrover.commands;
 
 import marsrover.exceptions.InvalidPositionException;
+import marsrover.vehicles.IVehicle;
 
 /**
  *
  * @author paulbright
  */
-public interface IVehicle {
-    public void turnLeft();
-    public void turnRight();
-    public void moveForward() throws InvalidPositionException;
-    public void reverse() throws InvalidPositionException;
+public class Reverse implements ICommandMovement{
+
+    @Override
+    public void execute(IVehicle vehicle) throws InvalidPositionException {
+	vehicle.reverse();
+    }
 }

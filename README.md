@@ -7,7 +7,8 @@ java -cp marsrover.jar test.TestRovers ../testcases/testcase_int_limit.txt ../te
 
 running junit tests
 
-java -cp ".:hamcrest-core-1.3.jar:junit-4.12.jar" org.junit.runner.JUnitCore test.JUnitTest
+java -cp ".:hamcrest-core-1.3.jar:junit-4.12.jar" org.junit.runner.JUnitCore test.GridAndFactoryTest
+java -cp ".:hamcrest-core-1.3.jar:junit-4.12.jar" org.junit.runner.JUnitCore test.RoverHandlerTest
 
 further improvements 
 

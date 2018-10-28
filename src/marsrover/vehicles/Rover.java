@@ -52,8 +52,9 @@ public class Rover implements IVehicle {
     }
     
     public void setCommandString(String command) throws InvalidCommandException {
+        validateCommands(command);
         this.command = command;
-	validateCommands();
+	
     }
     
     public void addCommand(ICommandMovement command){
@@ -115,8 +116,13 @@ public class Rover implements IVehicle {
 	position.moveForward();
     }
 
-    private void validateCommands() throws InvalidCommandException{
+    private void validateCommands(String command) throws InvalidCommandException{
 	this.commands =  MovementCommandGenerator.generateCommands(command);
+    }
+
+    @Override
+    public void reverse() throws InvalidPositionException {
+        position.reverse();
     }
  
 }

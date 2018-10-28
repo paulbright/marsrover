@@ -50,7 +50,7 @@ public class Position {
 //        }
 //    }
     
-    private void step() throws InvalidPositionException{
+    private void stepForward() throws InvalidPositionException{
        switch(orientation.getDirection()){
            case EAST:
 	       ++location.x;
@@ -67,6 +67,25 @@ public class Position {
        }
        Grid.validate(location);
     }
+    
+    private void stepBackward() throws InvalidPositionException{
+       switch(orientation.getDirection()){
+           case EAST:
+	       --location.x;
+               break;
+           case WEST:
+               ++location.x;
+               break;
+           case NORTH:
+               --location.y;
+               break;
+           case SOUTH:
+               ++location.y;
+               break;
+       }
+       Grid.validate(location);
+    }
+    
     @Override
     public String toString(){
         return  location.x + " " + location.y; 
@@ -81,7 +100,11 @@ public class Position {
     }
 
     public void moveForward() throws InvalidPositionException {
-	this.step();
+	this.stepForward();
+    }
+    
+    public void reverse() throws InvalidPositionException {
+	this.stepBackward();
     }
     
 }
