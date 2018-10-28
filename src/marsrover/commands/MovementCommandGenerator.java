@@ -32,6 +32,9 @@ public class MovementCommandGenerator {
 		case 'R':
 		    commands.add(new TurnRight());
 		    break;
+                case 'B':
+		    commands.add(new Reverse());
+		    break;
 		default :
 		    throw new InvalidCommandException(command.charAt(i) 
 			    + " is not a valid command");
