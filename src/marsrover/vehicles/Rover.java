@@ -5,6 +5,9 @@
  */
 package marsrover.vehicles;
 
+import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.Image;
 import marsrover.exceptions.InvalidPositionException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,10 @@ import marsrover.geometry.Position;
 import marsrover.commands.ICommandMovement;
 import marsrover.commands.MovementCommandGenerator;
 import marsrover.exceptions.InvalidCommandException;
+import marsrover.geometry.Grid;
+import marsrover.gui.GridCanvas;
+import marsrover.utility.ImageHandler;
+
 
 /**
  *
@@ -23,8 +30,9 @@ public class Rover implements IVehicle {
     private Position position; 
     private String command;   
     private List <ICommandMovement> commands;
-
-
+    private static Image img = ImageHandler.loadImage("/Users/paulbright/Pictures/jeep.jpg");
+    
+    
     public Rover(String name, Position position){
         this.name = name;
         this.position = position;                
@@ -124,5 +132,17 @@ public class Rover implements IVehicle {
     public void reverse() throws InvalidPositionException {
         position.reverse();
     }
- 
+
+    public void draw(Canvas canvas) {
+       
+        int width = canvas.getSize().width;
+        int height = canvas.getSize().height;
+        int w = width/Grid.getTx();
+        int h = height/Grid.getTy();
+        int x = (position.getLocation().x) * w;
+        int y = (position.getLocation().y + 1) * h;
+        canvas.getGraphics().drawImage(img, x, height-y,w,h,null);
+                
+    }
+
 }

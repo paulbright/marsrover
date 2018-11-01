@@ -8,10 +8,6 @@ package marsrover.commands;
 
 import java.util.ArrayList;
 import java.util.List;
-import marsrover.commands.ICommandMovement;
-import marsrover.commands.MoveForward;
-import marsrover.commands.TurnLeft;
-import marsrover.commands.TurnRight;
 import marsrover.exceptions.InvalidCommandException;
 
 /**

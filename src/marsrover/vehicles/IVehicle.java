@@ -5,7 +5,10 @@
  */
 package marsrover.vehicles;
 
+import java.util.List;
+import marsrover.commands.ICommandMovement;
 import marsrover.exceptions.InvalidPositionException;
+import marsrover.geometry.Position;
 
 /**
  *
@@ -16,4 +19,9 @@ public interface IVehicle {
     public void turnRight();
     public void moveForward() throws InvalidPositionException;
     public void reverse() throws InvalidPositionException;
+    
+    public Position getPosition();
+    public String getName();
+    public List <ICommandMovement> getCommandList();
+    public void executeCommand(ICommandMovement command) throws InvalidPositionException;
 }
