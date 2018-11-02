@@ -38,7 +38,7 @@ public class MarsRover {
 //            return;
 //        }
         
-        Grid.initGrid(10, 10);
+        Grid.initGrid(5, 5);
         RoverFactory rf = new RoverFactory();
         Rover rover = (Rover)rf.makeVehicle("", 0, 0, "N", "");
         Grid.addRover(rover);

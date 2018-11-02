@@ -6,7 +6,6 @@
 package marsrover.vehicles;
 
 import java.awt.Canvas;
-import java.awt.Graphics;
 import java.awt.Image;
 import marsrover.exceptions.InvalidPositionException;
 import java.util.ArrayList;
@@ -15,9 +14,9 @@ import marsrover.geometry.Orientation;
 import marsrover.geometry.Position;
 import marsrover.commands.ICommandMovement;
 import marsrover.commands.MovementCommandGenerator;
+import marsrover.enums.DIRECTION;
 import marsrover.exceptions.InvalidCommandException;
 import marsrover.geometry.Grid;
-import marsrover.gui.GridCanvas;
 import marsrover.utility.ImageHandler;
 
 
@@ -30,7 +29,10 @@ public class Rover implements IVehicle {
     private Position position; 
     private String command;   
     private List <ICommandMovement> commands;
-    private static Image img = ImageHandler.loadImage("/Users/paulbright/Pictures/jeep.jpg");
+    private static Image img_n = ImageHandler.loadImage("/Users/paulbright/Pictures/rover_n.png");
+    private static Image img_s = ImageHandler.loadImage("/Users/paulbright/Pictures/rover_s.png");
+    private static Image img_e = ImageHandler.loadImage("/Users/paulbright/Pictures/rover_e.png");
+    private static Image img_w = ImageHandler.loadImage("/Users/paulbright/Pictures/rover_w.png");
     
     
     public Rover(String name, Position position){
@@ -141,6 +143,9 @@ public class Rover implements IVehicle {
         int h = height/Grid.getTy();
         int x = (position.getLocation().x) * w;
         int y = (position.getLocation().y + 1) * h;
+        Image img = position.getOrientation().getDirection() == DIRECTION.NORTH ? img_n :
+                    position.getOrientation().getDirection() == DIRECTION.SOUTH ? img_s :
+                    position.getOrientation().getDirection() == DIRECTION.EAST ? img_e : img_w;
         canvas.getGraphics().drawImage(img, x, height-y,w,h,null);
                 
     }
