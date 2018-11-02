@@ -7,6 +7,7 @@ package marsrover.vehicles;
 
 import java.awt.Canvas;
 import java.awt.Image;
+import java.net.URLClassLoader;
 import marsrover.exceptions.InvalidPositionException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +31,14 @@ public class Rover implements IVehicle {
     private String command;   
     private List <ICommandMovement> commands; 
     
-    private static Image img_n = ImageHandler.loadImage(Rover.class.getResource("../images/rover_n.png").getPath());
-    private static Image img_s = ImageHandler.loadImage(Rover.class.getResource("../images/rover_s.png").getPath());
-    private static Image img_e = ImageHandler.loadImage(Rover.class.getResource("../images/rover_e.png").getPath());
-    private static Image img_w = ImageHandler.loadImage(Rover.class.getResource("../images/rover_w.png").getPath());
+    //standard loading
+    private static Image img_n = ImageHandler.loadImage(Rover.class.getResource("/marsrover/images/rover_n.png"));
+    private static Image img_s = ImageHandler.loadImage(Rover.class.getResource("/marsrover/images/rover_s.png"));
+    private static Image img_e = ImageHandler.loadImage(Rover.class.getResource("/marsrover/images/rover_e.png"));
+    private static Image img_w = ImageHandler.loadImage(Rover.class.getResource("/marsrover/images/rover_w.png"));
     
-    
-    public Rover(String name, Position position){            
+   
+    public Rover(String name, Position position){  
         this.name = name;
         this.position = position;                
 	commands = new ArrayList<>();
