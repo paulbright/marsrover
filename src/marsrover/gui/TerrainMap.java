@@ -12,6 +12,7 @@ package marsrover.gui;
 import java.awt.Canvas;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
@@ -25,7 +26,7 @@ import marsrover.vehicles.RoverHandler;
 /**
  * This is the demo class.
  */
-public class TerrainMap extends Frame implements KeyListener{
+public class TerrainMap extends Frame {
 
     /*
    * Construct a GfxDemo2 given its title, width and height. Uses a
@@ -33,7 +34,7 @@ public class TerrainMap extends Frame implements KeyListener{
      */
     private GridCanvas canvas = null;
 
-    TerrainMap(String title, int w, int h, int rows, int cols) {
+    public TerrainMap(String title, int w, int h, int rows, int cols) {
         setTitle(title);
         setFocusable(true);
         // Now create a Canvas and add it to the Frame.
@@ -41,13 +42,14 @@ public class TerrainMap extends Frame implements KeyListener{
         add(canvas);
         canvas.setRovers(Grid.getRovers());
         RoverHandler.getInstance().addObserver(canvas);
-       
+        
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 setVisible(false);
                 dispose();
                 System.exit(0);
             }
+
         });
 
         pack();
@@ -57,20 +59,4 @@ public class TerrainMap extends Frame implements KeyListener{
         return this.canvas;
     }
 
-     @Override
-    public void keyTyped(KeyEvent e) {
-        System.out.println("key typed");
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        System.out.println("key pressed");
-        System.out.println(e.getKeyCode());
-        canvas.execCommand(new MoveForward());
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        System.out.println("key released");
-    }
 }

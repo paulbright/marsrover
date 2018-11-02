@@ -43,8 +43,11 @@ public class MarsRover {
         Rover rover = (Rover)rf.makeVehicle("", 0, 0, "N", "");
         Grid.addRover(rover);
         
-        DrawImageOnCavas game = new DrawImageOnCavas("Mars Rover", 1200, 1200);
-        game.start();
+        TerrainMap tm = new TerrainMap("Mars Rover", 800, 800, Grid.getTx(), Grid.getTy());        
+        tm.show(true);
+        
+        //DrawImageOnCavas game = new DrawImageOnCavas("Mars Rover", 1200, 1200);
+        //game.start();
 
 
         //List<String>results = RoverHandler.getInstance().animateVehicles();
