@@ -50,7 +50,7 @@ public class Grid {
     }
 
     private static void validate(int x, int y) throws InvalidPositionException{
-        if( x < getLx() || x > getTx() || y < getLy() || y > getTy() ) 
+        if( x < getLx() || x >= getTx() || y < getLy() || y >= getTy() ) 
             throw new InvalidPositionException("Invalid poistion (" + x +"," + y +")" );
        
     }

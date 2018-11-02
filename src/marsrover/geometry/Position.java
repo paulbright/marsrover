@@ -77,21 +77,29 @@ public class Position {
     }
     
     private void stepBackward() throws InvalidPositionException{
-       switch(orientation.getDirection()){
+        Point newLoc = new Point(location);
+        switch(orientation.getDirection()){
            case EAST:
-	       --location.x;
+	       --newLoc.x;
                break;
            case WEST:
-               ++location.x;
+               ++newLoc.x;
                break;
            case NORTH:
-               --location.y;
+               --newLoc.y;
                break;
            case SOUTH:
-               ++location.y;
+               ++newLoc.y;
                break;
        }
-       Grid.validate(location);
+       try{
+            Grid.validate(newLoc);
+            location.x = newLoc.x;
+            location.y = newLoc.y;
+       }
+       catch(InvalidPositionException ex){
+           throw ex;
+       }
     }
     
     @Override

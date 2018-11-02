@@ -28,14 +28,15 @@ public class Rover implements IVehicle {
     private String name;
     private Position position; 
     private String command;   
-    private List <ICommandMovement> commands;
-    private static Image img_n = ImageHandler.loadImage("/Users/paulbright/Pictures/rover_n.png");
-    private static Image img_s = ImageHandler.loadImage("/Users/paulbright/Pictures/rover_s.png");
-    private static Image img_e = ImageHandler.loadImage("/Users/paulbright/Pictures/rover_e.png");
-    private static Image img_w = ImageHandler.loadImage("/Users/paulbright/Pictures/rover_w.png");
+    private List <ICommandMovement> commands; 
+    
+    private static Image img_n = ImageHandler.loadImage(Rover.class.getResource("../images/rover_n.png").getPath());
+    private static Image img_s = ImageHandler.loadImage(Rover.class.getResource("../images/rover_s.png").getPath());
+    private static Image img_e = ImageHandler.loadImage(Rover.class.getResource("../images/rover_e.png").getPath());
+    private static Image img_w = ImageHandler.loadImage(Rover.class.getResource("../images/rover_w.png").getPath());
     
     
-    public Rover(String name, Position position){
+    public Rover(String name, Position position){            
         this.name = name;
         this.position = position;                
 	commands = new ArrayList<>();
