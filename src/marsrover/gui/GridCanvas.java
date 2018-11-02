@@ -79,6 +79,7 @@ public class GridCanvas extends Canvas implements IVehicleObserver {
 
     public void paint(Graphics g) {
         int i;
+        super.paint(g);
         width = getSize().width;
         height = getSize().height;
 
@@ -94,7 +95,7 @@ public class GridCanvas extends Canvas implements IVehicleObserver {
             g.drawLine(i * rowWid, 0, i * rowWid, height);
         }
 
-        drawRovers();
+        drawRovers();        
     }
 
     private void drawRovers() {
@@ -109,7 +110,7 @@ public class GridCanvas extends Canvas implements IVehicleObserver {
         } catch (InvalidPositionException ex) {
             System.out.println("illegal move");
         } finally{
-            drawRovers();
+            paint(this.getGraphics());
             System.out.println(rovers.get(0).toString());
         }
     }

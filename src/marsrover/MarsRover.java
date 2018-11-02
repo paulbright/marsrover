@@ -38,7 +38,7 @@ public class MarsRover {
 //            return;
 //        }
         
-        Grid.initGrid(5, 5);
+        Grid.initGrid(10, 10);
         RoverFactory rf = new RoverFactory();
         Rover rover = (Rover)rf.makeVehicle("", 0, 0, "N", "");
         Grid.addRover(rover);
@@ -48,8 +48,6 @@ public class MarsRover {
         
         //DrawImageOnCavas game = new DrawImageOnCavas("Mars Rover", 1200, 1200);
         //game.start();
-
-
         //List<String>results = RoverHandler.getInstance().animateVehicles();
         
     }

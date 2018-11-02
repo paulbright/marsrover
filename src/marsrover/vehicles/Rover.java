@@ -148,9 +148,8 @@ public class Rover implements IVehicle {
         int y = (position.getLocation().y + 1) * h;
         Image img = position.getOrientation().getDirection() == DIRECTION.NORTH ? img_n :
                     position.getOrientation().getDirection() == DIRECTION.SOUTH ? img_s :
-                    position.getOrientation().getDirection() == DIRECTION.EAST ? img_e : img_w;
-        canvas.getGraphics().drawImage(img, x, height-y,w,h,null);
-                
+                    position.getOrientation().getDirection() == DIRECTION.EAST ? img_e : img_w;                
+        canvas.getGraphics().drawImage(img, x, height-y,w,h,null);                
     }
 
 }
